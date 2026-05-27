@@ -105,61 +105,6 @@
       line-height: 1.65;
     }
 
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-    }
-
-    .meta-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .meta-pill {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(10, 10, 14, 0.86);
-      color: var(--muted);
-    }
-
-    .meta-pill strong {
-      color: var(--text);
-    }
-
-    .primary-action {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 16px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--blue), var(--blue-dark));
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 10px 22px rgba(23, 104, 232, 0.24);
-      transition: transform 140ms ease, box-shadow 140ms ease;
-    }
-
-    .primary-action:hover,
-    .primary-action:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(23, 104, 232, 0.32);
-      outline: none;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
@@ -257,14 +202,9 @@
         align-items: flex-start;
       }
 
-      .hero-meta,
       .card-footer {
         align-items: stretch;
         flex-direction: column;
-      }
-
-      .primary-action {
-        width: 100%;
       }
     }
 
@@ -283,14 +223,6 @@
         font-size: clamp(1.8rem, 9vw, 2.4rem);
       }
 
-      .meta-list {
-        width: 100%;
-      }
-
-      .meta-pill {
-        width: 100%;
-        justify-content: center;
-      }
     }
   </style>
 </head>
@@ -304,14 +236,6 @@
           <h1>Random Things Hub</h1>
           <p class="lead">Selecciona una herramienta del proyecto y abre cada módulo desde un único punto de entrada.</p>
         </div>
-      </div>
-
-      <div class="hero-meta">
-        <div class="meta-list" aria-label="Resumen del proyecto">
-          <span class="meta-pill"><strong id="pageCount">0</strong> herramientas</span>
-        </div>
-
-        <a class="primary-action" href="html/tiny-wheel.html">Abrir Tiny Wheel</a>
       </div>
     </header>
 
@@ -351,7 +275,6 @@
     ];
 
     const grid = document.querySelector("#pageGrid");
-    const pageCount = document.querySelector("#pageCount");
 
     function createCard(page) {
       const card = document.createElement("a");
@@ -376,15 +299,10 @@
       return card;
     }
 
-    function updateSummary() {
-      pageCount.textContent = String(pages.length);
-    }
-
     function renderPages() {
       grid.replaceChildren(...pages.map(createCard));
     }
 
-    updateSummary();
     renderPages();
   </script>
 </body>
