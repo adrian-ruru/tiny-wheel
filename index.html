@@ -16,12 +16,9 @@
       --line: #24242d;
       --blue: #2f80ff;
       --blue-dark: #1768e8;
-      --green: #75c85a;
-      --orange: #ffb454;
       --shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
       --radius-lg: 24px;
       --radius-md: 18px;
-      --radius-sm: 14px;
       --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -45,15 +42,8 @@
         var(--bg);
     }
 
-    a,
-    button,
-    input {
+    a {
       font: inherit;
-    }
-
-    button {
-      border: 0;
-      cursor: pointer;
     }
 
     .hub {
@@ -170,90 +160,6 @@
       outline: none;
     }
 
-    .toolbar {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
-      padding: 18px;
-    }
-
-    .toolbar-top {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .search-wrap {
-      flex: 1 1 320px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .search-label {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .search {
-      width: 100%;
-      min-height: 48px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: #0b0b0f;
-      color: var(--text);
-    }
-
-    .search::placeholder {
-      color: #767684;
-    }
-
-    .search:focus {
-      border-color: rgba(47, 128, 255, 0.72);
-      box-shadow: 0 0 0 3px rgba(47, 128, 255, 0.16);
-      outline: none;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .filter-chip {
-      min-height: 40px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: transparent;
-      color: var(--muted);
-      transition: border-color 140ms ease, background-color 140ms ease, color 140ms ease;
-    }
-
-    .filter-chip:hover,
-    .filter-chip:focus-visible {
-      border-color: rgba(47, 128, 255, 0.5);
-      color: var(--text);
-      outline: none;
-    }
-
-    .filter-chip.is-active {
-      border-color: rgba(47, 128, 255, 0.55);
-      background: rgba(47, 128, 255, 0.14);
-      color: var(--text);
-    }
-
-    .hint {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
@@ -284,16 +190,10 @@
       outline: none;
     }
 
-    .card--pending:hover {
-      transform: none;
-      border-color: var(--line);
-      box-shadow: var(--shadow);
-    }
-
     .card-head {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 12px;
     }
 
@@ -305,31 +205,6 @@
       border-radius: 14px;
       background: var(--panel-3);
       font-size: 24px;
-    }
-
-    .card-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .card-status::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-    }
-
-    .card-status.pending::before {
-      background: var(--orange);
     }
 
     .card-category {
@@ -368,31 +243,13 @@
       font-weight: 700;
     }
 
-    .card-meta {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .empty {
-      display: none;
-      margin-top: 18px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .empty.visible {
-      display: block;
-    }
-
     @media (max-width: 700px) {
       .hub {
         width: min(100% - 16px, 1040px);
         padding: 16px 0 36px;
       }
 
-      .hero,
-      .toolbar,
-      .empty {
+      .hero {
         padding: 16px;
       }
 
@@ -401,7 +258,6 @@
       }
 
       .hero-meta,
-      .toolbar-top,
       .card-footer {
         align-items: stretch;
         flex-direction: column;
@@ -409,14 +265,6 @@
 
       .primary-action {
         width: 100%;
-      }
-
-      .filters {
-        width: 100%;
-      }
-
-      .filter-chip {
-        flex: 1 1 120px;
       }
     }
 
@@ -454,40 +302,20 @@
         <div>
           <p class="eyebrow">Hub general del proyecto</p>
           <h1>Random Things Hub</h1>
-          <p class="lead">Selecciona una herramienta del proyecto. El hub muestra lo que ya está disponible y también lo que sigue en desarrollo.</p>
+          <p class="lead">Selecciona una herramienta del proyecto y abre cada módulo desde un único punto de entrada.</p>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div class="meta-list" aria-label="Estado del proyecto">
+        <div class="meta-list" aria-label="Resumen del proyecto">
           <span class="meta-pill"><strong id="pageCount">0</strong> herramientas</span>
-          <span class="meta-pill"><strong id="readyCount">0</strong> listas</span>
-          <span class="meta-pill"><strong id="pendingCount">0</strong> pendientes</span>
         </div>
 
         <a class="primary-action" href="html/tiny-wheel.html">Abrir Tiny Wheel</a>
       </div>
     </header>
 
-    <section class="toolbar panel" aria-label="Filtros del hub">
-      <div class="toolbar-top">
-        <label class="search-wrap" for="searchInput">
-          <span class="search-label">Buscar herramienta</span>
-          <input id="searchInput" class="search" type="search" placeholder="Tiny Wheel, dados, moneda..." aria-label="Buscar herramienta" />
-        </label>
-
-        <div class="filters" role="group" aria-label="Filtrar herramientas">
-          <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">Todas</button>
-          <button class="filter-chip" type="button" data-filter="ready" aria-pressed="false">Listas</button>
-          <button class="filter-chip" type="button" data-filter="pending" aria-pressed="false">Pendientes</button>
-        </div>
-      </div>
-
-      <p id="resultsLabel" class="hint" aria-live="polite">Pulsa / para buscar rápidamente.</p>
-    </section>
-
     <section id="pageGrid" class="grid" aria-label="Herramientas del proyecto"></section>
-    <p id="emptyState" class="empty panel">No hay herramientas que coincidan con la búsqueda actual.</p>
   </main>
 
   <script>
@@ -497,99 +325,43 @@
         category: "Ruleta",
         description: "Ruleta principal del proyecto con editor visual y guardado en JSON.",
         href: "html/tiny-wheel.html",
-        emoji: "🛞",
-        ready: true
+        emoji: "🛞"
       },
       {
         title: "Roller Dice",
         category: "Dados",
-        description: "Herramienta prevista para lanzar dados y tomar decisiones rápidas.",
+        description: "Lanza dados y toma decisiones rápidas.",
         href: "html/roller-dice.html",
-        emoji: "🎲",
-        ready: false
+        emoji: "🎲"
       },
       {
         title: "Números aleatorios",
         category: "Rango numérico",
-        description: "Generador futuro para obtener números dentro de un rango configurable.",
-        href: "html/num-ramdom.html",
-        emoji: "🔢",
-        ready: false
+        description: "Genera números dentro de un rango configurable.",
+        href: "html/ramdom-numbers.html",
+        emoji: "🔢"
       },
       {
         title: "Coin Flip",
         category: "Moneda",
-        description: "Cara o cruz para resolver una elección binaria cuando esté implementado.",
+        description: "Cara o cruz para resolver una elección binaria.",
         href: "html/coin-flip.html",
-        emoji: "🪙",
-        ready: false
+        emoji: "🪙"
       }
     ];
 
     const grid = document.querySelector("#pageGrid");
-    const searchInput = document.querySelector("#searchInput");
-    const emptyState = document.querySelector("#emptyState");
-    const resultsLabel = document.querySelector("#resultsLabel");
     const pageCount = document.querySelector("#pageCount");
-    const readyCount = document.querySelector("#readyCount");
-    const pendingCount = document.querySelector("#pendingCount");
-    const filterButtons = Array.from(document.querySelectorAll(".filter-chip"));
-
-    const state = {
-      search: "",
-      filter: "all"
-    };
-
-    function formatCount(count) {
-      return `${count} herramienta${count === 1 ? "" : "s"}`;
-    }
-
-    function matchesFilter(page) {
-      if (state.filter === "ready") {
-        return page.ready;
-      }
-
-      if (state.filter === "pending") {
-        return !page.ready;
-      }
-
-      return true;
-    }
-
-    function getVisiblePages() {
-      const term = state.search.trim().toLowerCase();
-
-      return pages.filter((page) => {
-        if (!matchesFilter(page)) {
-          return false;
-        }
-
-        if (!term) {
-          return true;
-        }
-
-        return [page.title, page.category, page.description, page.href]
-          .join(" ")
-          .toLowerCase()
-          .includes(term);
-      });
-    }
 
     function createCard(page) {
-      const card = document.createElement(page.ready ? "a" : "article");
-      card.className = `card${page.ready ? "" : " card--pending"}`;
-
-      if (page.ready) {
-        card.href = page.href;
-        card.setAttribute("aria-label", `Abrir ${page.title}`);
-      } else {
-        card.setAttribute("aria-label", `${page.title} pendiente`);
-      }
+      const card = document.createElement("a");
+      card.className = "card";
+      card.href = page.href;
+      card.setAttribute("aria-label", `Abrir ${page.title}`);
 
       card.innerHTML = `
         <div class="card-head">
           <span class="card-icon" aria-hidden="true">${page.emoji}</span>
-          <span class="card-status ${page.ready ? "" : "pending"}">${page.ready ? "Lista" : "Pendiente"}</span>
         </div>
         <div>
           <p class="card-category">${page.category}</p>
@@ -597,8 +369,7 @@
         </div>
         <p class="card-description">${page.description}</p>
         <div class="card-footer">
-          <span class="card-action">${page.ready ? "Abrir herramienta" : "Aún no disponible"}</span>
-          <span class="card-meta">${page.ready ? "Disponible ahora" : "Próximamente"}</span>
+          <span class="card-action">Abrir herramienta</span>
         </div>
       `;
 
@@ -606,66 +377,14 @@
     }
 
     function updateSummary() {
-      const total = pages.length;
-      const ready = pages.filter((page) => page.ready).length;
-
-      pageCount.textContent = String(total);
-      readyCount.textContent = String(ready);
-      pendingCount.textContent = String(total - ready);
-    }
-
-    function updateFilterButtons() {
-      filterButtons.forEach((button) => {
-        const active = button.dataset.filter === state.filter;
-        button.classList.toggle("is-active", active);
-        button.setAttribute("aria-pressed", String(active));
-      });
+      pageCount.textContent = String(pages.length);
     }
 
     function renderPages() {
-      const visiblePages = getVisiblePages();
-      const hasCustomView = state.filter !== "all" || state.search.trim() !== "";
-
-      grid.replaceChildren(...visiblePages.map(createCard));
-      emptyState.classList.toggle("visible", visiblePages.length === 0);
-      resultsLabel.textContent = hasCustomView
-        ? `Mostrando ${formatCount(visiblePages.length)} de ${pages.length}.`
-        : "Pulsa / para buscar rápidamente.";
+      grid.replaceChildren(...pages.map(createCard));
     }
 
-    searchInput.addEventListener("input", (event) => {
-      state.search = event.target.value;
-      renderPages();
-    });
-
-    searchInput.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && searchInput.value) {
-        searchInput.value = "";
-        state.search = "";
-        renderPages();
-      }
-    });
-
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        state.filter = button.dataset.filter;
-        updateFilterButtons();
-        renderPages();
-      });
-    });
-
-    document.addEventListener("keydown", (event) => {
-      const tagName = document.activeElement?.tagName;
-      const isTyping = tagName === "INPUT" || tagName === "TEXTAREA";
-
-      if (event.key === "/" && !isTyping) {
-        event.preventDefault();
-        searchInput.focus();
-      }
-    });
-
     updateSummary();
-    updateFilterButtons();
     renderPages();
   </script>
 </body>
