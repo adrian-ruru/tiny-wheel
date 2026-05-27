@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hub</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f1eb;
+      --panel: #fffdf8;
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #ddd6c8;
+      --accent: #176b87;
+      --accent-strong: #0f5268;
+      --green: #287a4d;
+      --orange: #a35c12;
+      --shadow: 0 18px 55px rgba(31, 41, 51, 0.14);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(23, 107, 135, 0.16), transparent 32%),
+        linear-gradient(315deg, rgba(163, 92, 18, 0.12), transparent 30%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    .hub {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .brand-mark {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border: 1px solid rgba(23, 107, 135, 0.25);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.72);
+      font-size: 28px;
+      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .summary {
+      min-width: 180px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.78);
+      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+    }
+
+    .summary strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .summary span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.8);
+      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+    }
+
+    .search {
+      width: min(420px, 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(23, 107, 135, 0.16);
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(23, 107, 135, 0.55);
+      box-shadow: 0 22px 70px rgba(31, 41, 51, 0.18);
+      outline: none;
+    }
+
+    .card-top {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .emoji {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: #eef7f7;
+      font-size: 26px;
+    }
+
+    .status {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status.pending {
+      color: var(--orange);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .path {
+      min-width: 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .empty {
+      display: none;
+      padding: 28px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.7);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty.visible {
+      display: block;
+    }
+
+    @media (max-width: 720px) {
+      .hub {
+        width: min(100% - 24px, 1120px);
+        padding: 24px 0;
+      }
+
+      .hero,
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        display: block;
+      }
+
+      .summary {
+        margin-top: 20px;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hint {
+        line-height: 1.45;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="hub">
+    <header class="hero">
+      <div>
+        <div class="brand-mark" aria-hidden="true">🛞</div>
+        <h1>Tiny Wheel Hub</h1>
+        <p class="lead">Acceso rápido a las herramientas HTML del proyecto. Añade nuevas páginas al listado del script cuando crezcan las utilidades.</p>
+      </div>
+      <div class="summary" aria-live="polite">
+        <strong id="pageCount">0</strong>
+        <span>páginas registradas</span>
+      </div>
+    </header>
+
+    <section class="toolbar" aria-label="Herramientas del hub">
+      <input id="searchInput" class="search" type="search" placeholder="Buscar herramienta..." aria-label="Buscar herramienta" />
+      <p class="hint">El hub enlaza tanto páginas listas como apartados en preparación.</p>
+    </section>
+
+    <section id="pageGrid" class="grid" aria-label="Páginas disponibles"></section>
+    <p id="emptyState" class="empty">No hay páginas que coincidan con la búsqueda.</p>
+  </main>
+
+  <script>
+    const pages = [
+      {
+        title: "Tiny Wheel",
+        description: "Ruleta personalizable con opciones, porcentajes, colores y guardado en JSON.",
+        href: "html/tiny-wheel.html",
+        emoji: "🛞",
+        ready: true
+      },
+      {
+        title: "Roller Dice",
+        description: "Lanzador de dados para decisiones rápidas y pruebas de azar.",
+        href: "html/roller-dice.html",
+        emoji: "🎲",
+        ready: false
+      },
+      {
+        title: "Números aleatorios",
+        description: "Generador de números dentro de un rango configurable.",
+        href: "html/num-ramdom.html",
+        emoji: "🔢",
+        ready: false
+      },
+      {
+        title: "Coin Flip",
+        description: "Lanzador de moneda para elegir entre dos posibilidades.",
+        href: "html/coin-flip.html",
+        emoji: "🪙",
+        ready: false
+      }
+    ];
+
+    const grid = document.querySelector("#pageGrid");
+    const searchInput = document.querySelector("#searchInput");
+    const emptyState = document.querySelector("#emptyState");
+    const pageCount = document.querySelector("#pageCount");
+
+    function createCard(page) {
+      const card = document.createElement("a");
+      card.className = "card";
+      card.href = page.href;
+      card.setAttribute("aria-label", `Abrir ${page.title}`);
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="emoji" aria-hidden="true">${page.emoji}</span>
+          <span class="status ${page.ready ? "" : "pending"}">${page.ready ? "Listo" : "Pendiente"}</span>
+        </div>
+        <div>
+          <h2>${page.title}</h2>
+          <p>${page.description}</p>
+        </div>
+        <div class="card-footer">
+          <span>Abrir</span>
+          <span class="path">${page.href}</span>
+        </div>
+      `;
+      return card;
+    }
+
+    function renderPages(filter = "") {
+      const normalizedFilter = filter.trim().toLowerCase();
+      const filteredPages = pages.filter((page) => {
+        const searchableText = `${page.title} ${page.description} ${page.href}`.toLowerCase();
+        return searchableText.includes(normalizedFilter);
+      });
+
+      grid.replaceChildren(...filteredPages.map(createCard));
+      emptyState.classList.toggle("visible", filteredPages.length === 0);
+      pageCount.textContent = pages.length;
+    }
+
+    searchInput.addEventListener("input", (event) => {
+      renderPages(event.target.value);
+    });
+
+    renderPages();
+  </script>
+</body>
+</html>
