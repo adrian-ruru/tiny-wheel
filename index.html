@@ -3,207 +3,354 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hub</title>
+  <title>Random Things Hub | Inicio</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f4f1eb;
-      --panel: #fffdf8;
-      --ink: #1f2933;
-      --muted: #667085;
-      --line: #ddd6c8;
-      --accent: #176b87;
-      --accent-strong: #0f5268;
-      --green: #287a4d;
-      --orange: #a35c12;
-      --shadow: 0 18px 55px rgba(31, 41, 51, 0.14);
-      --radius: 8px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color-scheme: dark;
+      --bg: #050507;
+      --panel: #101014;
+      --panel-2: #17171d;
+      --panel-3: #202028;
+      --text: #f5f7fb;
+      --muted: #9a9aa5;
+      --line: #24242d;
+      --blue: #2f80ff;
+      --blue-dark: #1768e8;
+      --green: #75c85a;
+      --orange: #ffb454;
+      --shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
+      min-height: 100%;
       margin: 0;
-      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    body {
       background:
-        linear-gradient(135deg, rgba(23, 107, 135, 0.16), transparent 32%),
-        linear-gradient(315deg, rgba(163, 92, 18, 0.12), transparent 30%),
+        radial-gradient(circle at top center, rgba(47, 128, 255, 0.14), transparent 32%),
+        radial-gradient(circle at 50% 0, rgba(28, 28, 40, 0.9), transparent 48%),
         var(--bg);
-      color: var(--ink);
+    }
+
+    a,
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
     }
 
     .hub {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1040px, calc(100% - 24px));
       margin: 0 auto;
-      padding: 40px 0;
+      padding: 24px 0 48px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(23, 23, 29, 0.98), rgba(12, 12, 16, 0.98));
+      box-shadow: var(--shadow);
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 24px;
+      padding: 24px;
+    }
+
+    .hero-brand {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
     }
 
     .brand-mark {
-      width: 54px;
-      height: 54px;
+      width: 60px;
+      height: 60px;
+      flex: 0 0 auto;
       display: grid;
       place-items: center;
-      margin-bottom: 14px;
-      border: 1px solid rgba(23, 107, 135, 0.25);
-      border-radius: var(--radius);
-      background: rgba(255, 253, 248, 0.72);
-      font-size: 28px;
-      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #1b1b24, #111118);
+      border: 1px solid #272732;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+      font-size: 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 6vw, 5rem);
-      line-height: 0.95;
-      letter-spacing: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
     }
 
     .lead {
-      max-width: 650px;
-      margin: 16px 0 0;
+      max-width: 62ch;
+      margin: 12px 0 0;
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    .summary {
-      min-width: 180px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 253, 248, 0.78);
-      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
-    }
-
-    .summary strong {
-      display: block;
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .summary span {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .toolbar {
+    .hero-meta {
       display: flex;
-      gap: 12px;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 253, 248, 0.8);
-      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
     }
 
-    .search {
-      width: min(420px, 100%);
+    .meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .meta-pill {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(10, 10, 14, 0.86);
+      color: var(--muted);
+    }
+
+    .meta-pill strong {
+      color: var(--text);
+    }
+
+    .primary-action {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--blue), var(--blue-dark));
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 10px 22px rgba(23, 104, 232, 0.24);
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .primary-action:hover,
+    .primary-action:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(23, 104, 232, 0.32);
       outline: none;
     }
 
+    .toolbar {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .toolbar-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      flex: 1 1 320px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .search-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .search {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #0b0b0f;
+      color: var(--text);
+    }
+
+    .search::placeholder {
+      color: #767684;
+    }
+
     .search:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(23, 107, 135, 0.16);
+      border-color: rgba(47, 128, 255, 0.72);
+      box-shadow: 0 0 0 3px rgba(47, 128, 255, 0.16);
+      outline: none;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-chip {
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      transition: border-color 140ms ease, background-color 140ms ease, color 140ms ease;
+    }
+
+    .filter-chip:hover,
+    .filter-chip:focus-visible {
+      border-color: rgba(47, 128, 255, 0.5);
+      color: var(--text);
+      outline: none;
+    }
+
+    .filter-chip.is-active {
+      border-color: rgba(47, 128, 255, 0.55);
+      background: rgba(47, 128, 255, 0.14);
+      color: var(--text);
     }
 
     .hint {
       margin: 0;
       color: var(--muted);
-      font-size: 0.92rem;
+      line-height: 1.55;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: 14px;
+      margin-top: 18px;
     }
 
     .card {
-      min-height: 210px;
+      min-height: 230px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       padding: 18px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      text-decoration: none;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, var(--panel-2), #0f0f14);
       color: inherit;
-      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
     }
 
     .card:hover,
     .card:focus-visible {
-      transform: translateY(-3px);
-      border-color: rgba(23, 107, 135, 0.55);
-      box-shadow: 0 22px 70px rgba(31, 41, 51, 0.18);
+      transform: translateY(-2px);
+      border-color: rgba(47, 128, 255, 0.44);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.42);
       outline: none;
     }
 
-    .card-top {
+    .card--pending:hover {
+      transform: none;
+      border-color: var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .card-head {
       display: flex;
-      gap: 12px;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
 
-    .emoji {
-      width: 46px;
-      height: 46px;
+    .card-icon {
+      width: 44px;
+      height: 44px;
       display: grid;
       place-items: center;
-      border-radius: var(--radius);
-      background: #eef7f7;
-      font-size: 26px;
+      border-radius: 14px;
+      background: var(--panel-3);
+      font-size: 24px;
     }
 
-    .status {
-      border: 1px solid currentColor;
+    .card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
       border-radius: 999px;
-      padding: 5px 9px;
-      color: var(--green);
-      font-size: 0.78rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.76rem;
       font-weight: 700;
       white-space: nowrap;
     }
 
-    .status.pending {
-      color: var(--orange);
+    .card-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .card-status.pending::before {
+      background: var(--orange);
+    }
+
+    .card-category {
+      margin: 0;
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .card h2 {
       margin: 0;
-      font-size: 1.35rem;
-      letter-spacing: 0;
+      font-size: 1.28rem;
+      line-height: 1.15;
     }
 
-    .card p {
+    .card-description {
       margin: 0;
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .card-footer {
@@ -212,29 +359,24 @@
       justify-content: space-between;
       gap: 12px;
       margin-top: auto;
-      padding-top: 12px;
+      padding-top: 14px;
       border-top: 1px solid var(--line);
-      color: var(--accent-strong);
+    }
+
+    .card-action {
+      color: var(--text);
       font-weight: 700;
     }
 
-    .path {
-      min-width: 0;
-      overflow: hidden;
+    .card-meta {
       color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      font-size: 0.9rem;
     }
 
     .empty {
       display: none;
-      padding: 28px;
-      border: 1px dashed var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 253, 248, 0.7);
-      color: var(--muted);
+      margin-top: 18px;
+      padding: 20px;
       text-align: center;
     }
 
@@ -242,85 +384,142 @@
       display: block;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 700px) {
       .hub {
-        width: min(100% - 24px, 1120px);
-        padding: 24px 0;
+        width: min(100% - 16px, 1040px);
+        padding: 16px 0 36px;
       }
 
       .hero,
-      .toolbar {
-        grid-template-columns: 1fr;
+      .toolbar,
+      .empty {
+        padding: 16px;
       }
 
-      .hero {
-        display: block;
+      .hero-brand {
+        align-items: flex-start;
       }
 
-      .summary {
-        margin-top: 20px;
-      }
-
-      .toolbar {
+      .hero-meta,
+      .toolbar-top,
+      .card-footer {
         align-items: stretch;
         flex-direction: column;
       }
 
-      .hint {
-        line-height: 1.45;
+      .primary-action {
+        width: 100%;
+      }
+
+      .filters {
+        width: 100%;
+      }
+
+      .filter-chip {
+        flex: 1 1 120px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .hero-brand {
+        flex-direction: column;
+      }
+
+      .brand-mark {
+        width: 52px;
+        height: 52px;
+        font-size: 26px;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 9vw, 2.4rem);
+      }
+
+      .meta-list {
+        width: 100%;
+      }
+
+      .meta-pill {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
   <main class="hub">
-    <header class="hero">
-      <div>
-        <div class="brand-mark" aria-hidden="true">🛞</div>
-        <h1>Tiny Wheel Hub</h1>
-        <p class="lead">Acceso rápido a las herramientas HTML del proyecto. Añade nuevas páginas al listado del script cuando crezcan las utilidades.</p>
+    <header class="hero panel">
+      <div class="hero-brand">
+        <div class="brand-mark" aria-hidden="true">🎲</div>
+        <div>
+          <p class="eyebrow">Hub general del proyecto</p>
+          <h1>Random Things Hub</h1>
+          <p class="lead">Selecciona una herramienta del proyecto. El hub muestra lo que ya está disponible y también lo que sigue en desarrollo.</p>
+        </div>
       </div>
-      <div class="summary" aria-live="polite">
-        <strong id="pageCount">0</strong>
-        <span>páginas registradas</span>
+
+      <div class="hero-meta">
+        <div class="meta-list" aria-label="Estado del proyecto">
+          <span class="meta-pill"><strong id="pageCount">0</strong> herramientas</span>
+          <span class="meta-pill"><strong id="readyCount">0</strong> listas</span>
+          <span class="meta-pill"><strong id="pendingCount">0</strong> pendientes</span>
+        </div>
+
+        <a class="primary-action" href="html/tiny-wheel.html">Abrir Tiny Wheel</a>
       </div>
     </header>
 
-    <section class="toolbar" aria-label="Herramientas del hub">
-      <input id="searchInput" class="search" type="search" placeholder="Buscar herramienta..." aria-label="Buscar herramienta" />
-      <p class="hint">El hub enlaza tanto páginas listas como apartados en preparación.</p>
+    <section class="toolbar panel" aria-label="Filtros del hub">
+      <div class="toolbar-top">
+        <label class="search-wrap" for="searchInput">
+          <span class="search-label">Buscar herramienta</span>
+          <input id="searchInput" class="search" type="search" placeholder="Tiny Wheel, dados, moneda..." aria-label="Buscar herramienta" />
+        </label>
+
+        <div class="filters" role="group" aria-label="Filtrar herramientas">
+          <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">Todas</button>
+          <button class="filter-chip" type="button" data-filter="ready" aria-pressed="false">Listas</button>
+          <button class="filter-chip" type="button" data-filter="pending" aria-pressed="false">Pendientes</button>
+        </div>
+      </div>
+
+      <p id="resultsLabel" class="hint" aria-live="polite">Pulsa / para buscar rápidamente.</p>
     </section>
 
-    <section id="pageGrid" class="grid" aria-label="Páginas disponibles"></section>
-    <p id="emptyState" class="empty">No hay páginas que coincidan con la búsqueda.</p>
+    <section id="pageGrid" class="grid" aria-label="Herramientas del proyecto"></section>
+    <p id="emptyState" class="empty panel">No hay herramientas que coincidan con la búsqueda actual.</p>
   </main>
 
   <script>
     const pages = [
       {
         title: "Tiny Wheel",
-        description: "Ruleta personalizable con opciones, porcentajes, colores y guardado en JSON.",
+        category: "Ruleta",
+        description: "Ruleta principal del proyecto con editor visual y guardado en JSON.",
         href: "html/tiny-wheel.html",
         emoji: "🛞",
         ready: true
       },
       {
         title: "Roller Dice",
-        description: "Lanzador de dados para decisiones rápidas y pruebas de azar.",
+        category: "Dados",
+        description: "Herramienta prevista para lanzar dados y tomar decisiones rápidas.",
         href: "html/roller-dice.html",
         emoji: "🎲",
         ready: false
       },
       {
         title: "Números aleatorios",
-        description: "Generador de números dentro de un rango configurable.",
+        category: "Rango numérico",
+        description: "Generador futuro para obtener números dentro de un rango configurable.",
         href: "html/num-ramdom.html",
         emoji: "🔢",
         ready: false
       },
       {
         title: "Coin Flip",
-        description: "Lanzador de moneda para elegir entre dos posibilidades.",
+        category: "Moneda",
+        description: "Cara o cruz para resolver una elección binaria cuando esté implementado.",
         href: "html/coin-flip.html",
         emoji: "🪙",
         ready: false
@@ -330,46 +529,143 @@
     const grid = document.querySelector("#pageGrid");
     const searchInput = document.querySelector("#searchInput");
     const emptyState = document.querySelector("#emptyState");
+    const resultsLabel = document.querySelector("#resultsLabel");
     const pageCount = document.querySelector("#pageCount");
+    const readyCount = document.querySelector("#readyCount");
+    const pendingCount = document.querySelector("#pendingCount");
+    const filterButtons = Array.from(document.querySelectorAll(".filter-chip"));
+
+    const state = {
+      search: "",
+      filter: "all"
+    };
+
+    function formatCount(count) {
+      return `${count} herramienta${count === 1 ? "" : "s"}`;
+    }
+
+    function matchesFilter(page) {
+      if (state.filter === "ready") {
+        return page.ready;
+      }
+
+      if (state.filter === "pending") {
+        return !page.ready;
+      }
+
+      return true;
+    }
+
+    function getVisiblePages() {
+      const term = state.search.trim().toLowerCase();
+
+      return pages.filter((page) => {
+        if (!matchesFilter(page)) {
+          return false;
+        }
+
+        if (!term) {
+          return true;
+        }
+
+        return [page.title, page.category, page.description, page.href]
+          .join(" ")
+          .toLowerCase()
+          .includes(term);
+      });
+    }
 
     function createCard(page) {
-      const card = document.createElement("a");
-      card.className = "card";
-      card.href = page.href;
-      card.setAttribute("aria-label", `Abrir ${page.title}`);
+      const card = document.createElement(page.ready ? "a" : "article");
+      card.className = `card${page.ready ? "" : " card--pending"}`;
+
+      if (page.ready) {
+        card.href = page.href;
+        card.setAttribute("aria-label", `Abrir ${page.title}`);
+      } else {
+        card.setAttribute("aria-label", `${page.title} pendiente`);
+      }
+
       card.innerHTML = `
-        <div class="card-top">
-          <span class="emoji" aria-hidden="true">${page.emoji}</span>
-          <span class="status ${page.ready ? "" : "pending"}">${page.ready ? "Listo" : "Pendiente"}</span>
+        <div class="card-head">
+          <span class="card-icon" aria-hidden="true">${page.emoji}</span>
+          <span class="card-status ${page.ready ? "" : "pending"}">${page.ready ? "Lista" : "Pendiente"}</span>
         </div>
         <div>
+          <p class="card-category">${page.category}</p>
           <h2>${page.title}</h2>
-          <p>${page.description}</p>
         </div>
+        <p class="card-description">${page.description}</p>
         <div class="card-footer">
-          <span>Abrir</span>
-          <span class="path">${page.href}</span>
+          <span class="card-action">${page.ready ? "Abrir herramienta" : "Aún no disponible"}</span>
+          <span class="card-meta">${page.ready ? "Disponible ahora" : "Próximamente"}</span>
         </div>
       `;
+
       return card;
     }
 
-    function renderPages(filter = "") {
-      const normalizedFilter = filter.trim().toLowerCase();
-      const filteredPages = pages.filter((page) => {
-        const searchableText = `${page.title} ${page.description} ${page.href}`.toLowerCase();
-        return searchableText.includes(normalizedFilter);
-      });
+    function updateSummary() {
+      const total = pages.length;
+      const ready = pages.filter((page) => page.ready).length;
 
-      grid.replaceChildren(...filteredPages.map(createCard));
-      emptyState.classList.toggle("visible", filteredPages.length === 0);
-      pageCount.textContent = pages.length;
+      pageCount.textContent = String(total);
+      readyCount.textContent = String(ready);
+      pendingCount.textContent = String(total - ready);
+    }
+
+    function updateFilterButtons() {
+      filterButtons.forEach((button) => {
+        const active = button.dataset.filter === state.filter;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    function renderPages() {
+      const visiblePages = getVisiblePages();
+      const hasCustomView = state.filter !== "all" || state.search.trim() !== "";
+
+      grid.replaceChildren(...visiblePages.map(createCard));
+      emptyState.classList.toggle("visible", visiblePages.length === 0);
+      resultsLabel.textContent = hasCustomView
+        ? `Mostrando ${formatCount(visiblePages.length)} de ${pages.length}.`
+        : "Pulsa / para buscar rápidamente.";
     }
 
     searchInput.addEventListener("input", (event) => {
-      renderPages(event.target.value);
+      state.search = event.target.value;
+      renderPages();
     });
 
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && searchInput.value) {
+        searchInput.value = "";
+        state.search = "";
+        renderPages();
+      }
+    });
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        state.filter = button.dataset.filter;
+        updateFilterButtons();
+        renderPages();
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const tagName = document.activeElement?.tagName;
+      const isTyping = tagName === "INPUT" || tagName === "TEXTAREA";
+
+      if (event.key === "/" && !isTyping) {
+        event.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    updateSummary();
+    updateFilterButtons();
     renderPages();
   </script>
 </body>
